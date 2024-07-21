@@ -40,3 +40,10 @@ $ ./mvnw spring-boot:run
 ```textmate
 $ ./mvnw test
 ```
+
+## 💻 Электронные ресурсы
+1. Spring поддерживает API проверки JavaBean (также известный 
+как JSR 303): https://jcp.org/en/jsr/detail?id=303
+2. Аннотация @CreditCardNumber задействует алгоритм Луна:
+   https://www.creditcardvalidator.org/articles/luhn-algorithm
+3. 
