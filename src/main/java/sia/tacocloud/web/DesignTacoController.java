@@ -3,10 +3,7 @@ package sia.tacocloud.web;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import sia.tacocloud.Ingredient;
 import sia.tacocloud.Ingredient.Type;
 import sia.tacocloud.Taco;
@@ -26,6 +23,7 @@ public class DesignTacoController {
      * Добавляет ингредиенты в Model.
      * Model - объект, в котором данные пересылаются между
      * контроллером и представлением
+     *
      * @param model объект Model
      */
     @ModelAttribute
@@ -54,6 +52,7 @@ public class DesignTacoController {
 
     /**
      * Создать заказ для размещения в модели
+     *
      * @return заказ клиента
      */
     @ModelAttribute(name = "tacoOrder")
@@ -63,6 +62,7 @@ public class DesignTacoController {
 
     /**
      * Создать объект Taco для размещения в модели
+     *
      * @return объект Taco
      */
     @ModelAttribute(name = "taco")
@@ -72,17 +72,34 @@ public class DesignTacoController {
 
     /**
      * Обрабатывает GET-запрос с путем /design
+     *
      * @return логическое представление (design.html)
      */
     @GetMapping
-    public String showDesignForm(){
+    public String showDesignForm() {
         return "design";
     }
 
     /**
+     * Отправляет рецепт тако
+     * @param taco объект, который имеет свойства, взятые из формы
+     * @param tacoOrder объект, который был помещен в модель методом order()
+     * @return перенаправление на страницу
+     */
+    @PostMapping
+    public String processTaco(Taco taco,
+                            @ModelAttribute TacoOrder tacoOrder) {
+        tacoOrder.addTaco(taco);
+        log.info("Processing taco: {}", taco);
+
+        return "redirect:/orders/current";
+    }
+
+    /**
      * Фильтрация ингредиентов по типам
+     *
      * @param ingredients список ингредиентов
-     * @param type тип ингредиента (белки, сыр, соус и др.)
+     * @param type        тип ингредиента (белки, сыр, соус и др.)
      * @return отфильтрованные ингредиенты
      */
     private Iterable<Ingredient> filterByType(List<Ingredient> ingredients,
