@@ -41,6 +41,31 @@ $ ./mvnw spring-boot:run
 $ ./mvnw test
 ```
 
+## 👨🏻‍💻 Работа с контроллерами представлений
+Любой класс конфигурации может реализовать интерфейс 
+`WebMvcConfigurer` и переопределить метод `addViewController`.
+Например, можно добавить объявление контроллера представления в 
+загрузочный класс `TacoCloudApplication`:
+
+```java
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@SpringBootApplication
+public class TacoCloudApplication implements WebMvcConfigurer {
+    public static void main(String[] args) {
+        SpringApplication.run(TacoCloudApplication.class, args);
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("home");
+    }
+}
+```
+
 ## 💻 Электронные ресурсы
 1. Spring поддерживает API проверки JavaBean (также известный 
 как JSR 303): https://jcp.org/en/jsr/detail?id=303
