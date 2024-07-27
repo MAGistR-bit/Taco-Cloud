@@ -6,9 +6,6 @@ import org.springframework.stereotype.Component;
 import sia.tacocloud.Ingredient;
 import sia.tacocloud.data.IngredientRepository;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author mikhail
  * Конвертер - любой класс, который реализует интерфейс Converter

@@ -82,4 +82,5 @@ http://localhost:8080/h2-console). В проекте определено имя
 как JSR 303): https://jcp.org/en/jsr/detail?id=303
 2. Аннотация @CreditCardNumber задействует алгоритм Луна:
    https://www.creditcardvalidator.org/articles/luhn-algorithm
-3. 
+3. Предметно-ориентированное проектирование (Domain-Driven Design, DDD):
+https://www.dddcommunity.org/book/evans_2003/
