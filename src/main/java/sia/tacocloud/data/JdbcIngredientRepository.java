@@ -20,7 +20,7 @@ public class JdbcIngredientRepository implements IngredientRepository {
     }
 
     @Override
-    public Iterable<Ingredient> findAll() {
+    public List<Ingredient> findAll() {
         return jdbcTemplate.query(
                 "select id, name, type from Ingredient",
                 this::mapRowToIngredient);
@@ -38,10 +38,10 @@ public class JdbcIngredientRepository implements IngredientRepository {
     @Override
     public Ingredient save(Ingredient ingredient) {
         jdbcTemplate.update(
-            "insert into Ingredient (id, name, type) VALUES (?, ?, ?)",
-            ingredient.getId(),
-            ingredient.getName(),
-            ingredient.getType().toString());
+                "insert into Ingredient (id, name, type) VALUES (?, ?, ?)",
+                ingredient.getId(),
+                ingredient.getName(),
+                ingredient.getType().toString());
         return ingredient;
     }
 

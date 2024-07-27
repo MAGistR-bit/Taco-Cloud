@@ -2,6 +2,7 @@ package sia.tacocloud.data;
 
 import sia.tacocloud.Ingredient;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IngredientRepository {
@@ -10,7 +11,7 @@ public interface IngredientRepository {
      *
      * @return коллекция объектов Ingredient
      */
-    Iterable<Ingredient> findAll();
+    List<Ingredient> findAll();
 
     /**
      * Получение одного ингредиента по идентификатору
