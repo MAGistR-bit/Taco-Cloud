@@ -13,6 +13,7 @@ import sia.tacocloud.Taco;
 import sia.tacocloud.TacoOrder;
 import sia.tacocloud.data.IngredientRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +40,10 @@ public class DesignTacoController {
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
         // Получить ингредиенты из базы данных
-        List<Ingredient> ingredients = ingredientRepo.findAll();
+        List<Ingredient> ingredients = new ArrayList<>();
+        for (Ingredient ingredient : ingredientRepo.findAll()) {
+            ingredients.add(ingredient);
+        }
 
         // Получить типы ингредиентов
         Type[] types = Ingredient.Type.values();

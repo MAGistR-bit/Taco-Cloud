@@ -1,31 +1,10 @@
 package sia.tacocloud.data;
 
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import sia.tacocloud.Ingredient;
 
-import java.util.List;
-import java.util.Optional;
+@Repository
+public interface IngredientRepository extends CrudRepository<Ingredient, String> {
 
-public interface IngredientRepository {
-    /**
-     * Получение всех ингредиентов в виде коллекции объектов
-     *
-     * @return коллекция объектов Ingredient
-     */
-    List<Ingredient> findAll();
-
-    /**
-     * Получение одного ингредиента по идентификатору
-     *
-     * @param id идентификатор ингредиента
-     * @return ингредиент, имеющий указанный идентификатор
-     */
-    Optional<Ingredient> findById(String id);
-
-    /**
-     * Сохранение объекта
-     *
-     * @param ingredient объект Ingredient, который необходимо сохранить
-     * @return сохраненный объект Ingredient
-     */
-    Ingredient save(Ingredient ingredient);
 }

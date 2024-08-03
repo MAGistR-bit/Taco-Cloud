@@ -1,12 +1,10 @@
 package sia.tacocloud.data;
 
 import org.springframework.asm.Type;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import sia.tacocloud.Ingredient;
 import sia.tacocloud.Taco;
@@ -17,17 +15,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-@Repository
-public class JdbcOrderRepository implements OrderRepository {
+public class JdbcOrderRepository {
 
     private final JdbcOperations jdbcOperations;
 
-    @Autowired
     public JdbcOrderRepository(JdbcOperations jdbcOperations) {
         this.jdbcOperations = jdbcOperations;
     }
 
-    @Override
     @Transactional
     public TacoOrder save(TacoOrder order) {
         // Создание объекта PreparedStatementCreatorFactory
@@ -99,7 +94,6 @@ public class JdbcOrderRepository implements OrderRepository {
 
         return tacoId;
     }
-
 
     private void saveIngredientRefs(long tacoId, List<Ingredient> ingredientRef) {
         int key = 0;

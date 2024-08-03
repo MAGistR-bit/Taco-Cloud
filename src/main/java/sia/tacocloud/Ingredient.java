@@ -1,6 +1,7 @@
 package sia.tacocloud;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 /**
  * @author mikhail
@@ -11,6 +12,7 @@ public class Ingredient {
     /**
      * Идентификатор ингредиента
      */
+    @Id
     private final String id;
     /**
      * Название ингредиента
