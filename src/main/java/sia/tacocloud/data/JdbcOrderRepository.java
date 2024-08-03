@@ -1,5 +1,6 @@
 package sia.tacocloud.data;
 
+import org.springframework.asm.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -7,6 +8,7 @@ import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import sia.tacocloud.Ingredient;
 import sia.tacocloud.Taco;
 import sia.tacocloud.TacoOrder;
 
@@ -28,6 +30,7 @@ public class JdbcOrderRepository implements OrderRepository {
     @Override
     @Transactional
     public TacoOrder save(TacoOrder order) {
+        // Создание объекта PreparedStatementCreatorFactory
         PreparedStatementCreatorFactory pscf = new PreparedStatementCreatorFactory(
                 "insert into Taco_Order (delivery_Name, delivery_Street, delivery_City, " +
                         " delivery_State, delivery_Zip, cc_number, " +
@@ -37,10 +40,11 @@ public class JdbcOrderRepository implements OrderRepository {
                 Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
                 Types.VARCHAR, Types.VARCHAR, Types.TIMESTAMP
         );
-
+        // Для получения идентификатора заказа
         pscf.setReturnGeneratedKeys(true);
         order.setPlacedAt(new Date());
 
+        // Создание PreparedStatementCreator
         PreparedStatementCreator psc = pscf.newPreparedStatementCreator(
                 Arrays.asList(
                         order.getDeliveryName(),
@@ -67,7 +71,45 @@ public class JdbcOrderRepository implements OrderRepository {
         return order;
     }
 
-    private long saveTaco(long orderId, int i, Taco taco) {
-        return 0L;
+    private long saveTaco(long orderId, int orderKey, Taco taco) {
+        taco.setCreatedAt(new Date());
+
+        PreparedStatementCreatorFactory pscf = new PreparedStatementCreatorFactory(
+                "insert into Taco "
+                        + "(name, created_at, taco_order, taco_order_key) "
+                        + "values (?, ?, ?, ?)", Types.VARCHAR, Types.TIMESTAMP, Type.LONG, Type.LONG
+        );
+        pscf.setReturnGeneratedKeys(true);
+
+        PreparedStatementCreator psc = pscf.newPreparedStatementCreator(
+                Arrays.asList(
+                        taco.getName(),
+                        taco.getCreatedAt(),
+                        orderId,
+                        orderKey
+                )
+        );
+
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcOperations.update(psc, keyHolder);
+        long tacoId = keyHolder.getKey().longValue();
+        taco.setId(tacoId);
+
+        saveIngredientRefs(tacoId, taco.getIngredients());
+
+        return tacoId;
     }
+
+
+    private void saveIngredientRefs(long tacoId, List<Ingredient> ingredientRef) {
+        int key = 0;
+
+        for (Ingredient ingredient : ingredientRef) {
+            jdbcOperations.update(
+                    "insert into Ingredient_Ref (ingredient, taco, taco_key) "
+                            + "values (?, ?, ?)",
+                    ingredient.getId(), tacoId, key++);
+        }
+    }
+
 }
