@@ -36,6 +36,10 @@ $ ./mvnw package
 ...
 $ java -jar target/taco-cloud-0.0.1-SNAPSHOT.jar
 ```
+
+> Если необходимо пропустить выполнение тестов, то следует воспользоваться
+> командой `./mvnw clean package -DskipTests`
+
 Или, благодаря использованию Spring Boot, плагин Spring Boot 
 Maven упрощает этот шаг еще больше:
 ```textmate
