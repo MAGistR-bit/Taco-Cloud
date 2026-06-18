@@ -3,6 +3,7 @@ package sia.tacocloud;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import sia.tacocloud.domain.Ingredient;
 
 import java.util.Date;
 import java.util.List;

@@ -1,7 +1,7 @@
 package sia.tacocloud.data;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import sia.tacocloud.Ingredient;
+import sia.tacocloud.domain.Ingredient;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

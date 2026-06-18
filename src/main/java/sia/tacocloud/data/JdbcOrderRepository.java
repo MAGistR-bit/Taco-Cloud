@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.transaction.annotation.Transactional;
-import sia.tacocloud.Ingredient;
+import sia.tacocloud.domain.Ingredient;
 import sia.tacocloud.Taco;
 import sia.tacocloud.TacoOrder;
 
