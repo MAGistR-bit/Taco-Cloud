@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import sia.tacocloud.domain.Ingredient;
 import sia.tacocloud.domain.Ingredient.Type;
 import sia.tacocloud.domain.Taco;
-import sia.tacocloud.TacoOrder;
+import sia.tacocloud.domain.TacoOrder;
 import sia.tacocloud.data.IngredientRepository;
 
 import java.util.ArrayList;

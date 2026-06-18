@@ -8,7 +8,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 import sia.tacocloud.domain.Ingredient;
 import sia.tacocloud.domain.Taco;
-import sia.tacocloud.TacoOrder;
+import sia.tacocloud.domain.TacoOrder;
 
 import java.sql.Types;
 import java.util.Arrays;
