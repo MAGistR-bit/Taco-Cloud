@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
+import sia.tacocloud.domain.Taco;
 
 import java.io.Serializable;
 import java.util.ArrayList;
