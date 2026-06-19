@@ -4,6 +4,14 @@
 
 <img src="src/main/resources/static/images/Spring.jpg" alt="Spring в действии" width="600" height="800">
 
+## Содержание
+1. [Структура проекта Spring](#-структура-проекта-spring)
+2. [Тестирование проекта](#-тестирование-проекта)
+3. [Работа с контроллерами представлений](#-работа-с-контроллерами-представлений)
+4. [База данных](#-база-данных)
+5. [Электронные ресурсы](#-электронные-ресурсы)
+6. [Шаблоны для создания представлений](#-шаблоны-для-создания-представлений)
+
 ## 📁 Структура проекта Spring
 Проект имеет типичную структуру проекта 
 Maven или Gradle, в которой исходный код помещается
@@ -85,6 +93,15 @@ public class TacoCloudApplication implements WebMvcConfigurer {
 http://localhost:8080/h2-console). В проекте определено имя базы данных.
 Таким образом, для подключения к базе данных (в консоли H2) используется
 следующий URL: "jdbc:h2:mem:tacocloud".
+
+## 🗂️ Шаблоны для создания представлений
+| Механизм шаблонов       | Начальная зависимость Spring Boot    | 
+|-------------------------|--------------------------------------|
+| FreeMarker              | spring-boot-starter-freemarker       |
+| Шаблоны Groovy          | spring-boot-starter-groovy-templates |
+| Java Server Pages (JSP) | Нет (поддерживается Tomcat или Jetty |
+| Mustache                | spring-boot-starter-mustache         |
+| Thymeleaf               | spring-boot-starter-thymeleaf        |
 
 
 ## 💻 Электронные ресурсы
