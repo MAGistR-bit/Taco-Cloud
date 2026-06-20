@@ -93,7 +93,7 @@ public class DesignTacoController {
      */
     @PostMapping
     public String processTaco(@Valid Taco taco, Errors errors,
-                              @ModelAttribute TacoOrder tacoOrder) {
+                              @ModelAttribute("tacoOrder") TacoOrder tacoOrder) {
         // Проверяем, имеются ли ошибке при заполнении объекта Taco
         if (errors.hasErrors()) {
             return "design";
