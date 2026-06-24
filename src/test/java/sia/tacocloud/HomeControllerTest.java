@@ -3,7 +3,9 @@ package sia.tacocloud;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import sia.tacocloud.data.jdbc.IngredientRepository;
 import sia.tacocloud.web.HomeController;
 
 import static org.hamcrest.Matchers.containsString;
@@ -24,6 +26,9 @@ public class HomeControllerTest {
      */
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private IngredientRepository ingredientRepository;
 
     /**
      * Проверка домашней страницы
