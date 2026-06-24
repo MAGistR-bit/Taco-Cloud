@@ -11,7 +11,7 @@ import sia.tacocloud.domain.Ingredient;
 import sia.tacocloud.domain.Ingredient.Type;
 import sia.tacocloud.domain.Taco;
 import sia.tacocloud.domain.TacoOrder;
-import sia.tacocloud.data.IngredientRepository;
+import sia.tacocloud.data.jdbc.IngredientRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +41,7 @@ public class DesignTacoController {
     public void addIngredientsToModel(Model model) {
         // Получить ингредиенты из базы данных
         List<Ingredient> ingredients = new ArrayList<>();
-        for (Ingredient ingredient : ingredientRepo.findAll()) {
-            ingredients.add(ingredient);
-        }
+        ingredientRepo.findAll().forEach(ingredients::add);
 
         // Получить типы ингредиентов
         Type[] types = Ingredient.Type.values();
