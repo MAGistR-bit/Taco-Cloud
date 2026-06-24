@@ -1,4 +1,4 @@
-package sia.tacocloud.data;
+package sia.tacocloud.data.jdbctemplate;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import sia.tacocloud.domain.Ingredient;
