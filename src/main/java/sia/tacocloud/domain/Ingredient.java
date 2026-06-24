@@ -1,27 +1,40 @@
 package sia.tacocloud.domain;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.relational.core.mapping.Table;
 
 /**
  * @author mikhail
  * Класс, представляющий ингредиенты тако
  */
 @Data
-public class Ingredient {
+@Table
+@AllArgsConstructor
+@NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
+public class Ingredient implements Persistable<String> {
     /**
      * Идентификатор ингредиента
      */
     @Id
-    private final String id;
+    private String id;
     /**
      * Название ингредиента
      */
-    private final String name;
+    private String name;
     /**
      * Тип ингредиента
      */
-    private final Type type;
+    private Type type;
+
+    @Override
+    public boolean isNew() {
+        return true;
+    }
 
     public enum Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE

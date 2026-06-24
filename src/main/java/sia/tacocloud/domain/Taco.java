@@ -3,6 +3,9 @@ package sia.tacocloud.domain;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Date;
 import java.util.List;
@@ -11,10 +14,13 @@ import java.util.List;
  * Класс, представляющий рецепт
  */
 @Data
+@Table
+@EqualsAndHashCode(exclude = "createdAt")
 public class Taco {
     /**
      * Идентификатор объекта
      */
+    @Id
     private Long id;
 
     /**
@@ -28,6 +34,9 @@ public class Taco {
 
     @NotNull
     @Size(min = 1, message = "You must choose at least 1 ingredient")
-    private List<Ingredient> ingredients;
+    private List<IngredientRef> ingredients;
 
+    public void addIngredient(Ingredient taco) {
+        this.ingredients.add(new IngredientRef(taco.getId()));
+    }
 }

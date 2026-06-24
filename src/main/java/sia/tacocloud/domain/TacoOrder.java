@@ -3,8 +3,11 @@ package sia.tacocloud.domain;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -17,14 +20,16 @@ import java.util.List;
  * Класс, представляющий заказ
  */
 @Data
+@Table
 public class TacoOrder implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
+    @Id
     private Long id;
 
-    private Date placedAt;
+    private Date placedAt = new Date();
 
     /**
      * Название доставки
@@ -45,6 +50,7 @@ public class TacoOrder implements Serializable {
      * Штат
      */
     @NotBlank(message = "State is required")
+    @Size(min = 2, max = 2, message = "State must be 2 characters")
     private String deliveryState;
     /**
      * Почтовый индекс
