@@ -12,6 +12,7 @@
 5. [Электронные ресурсы](#-электронные-ресурсы)
 6. [Шаблоны для создания представлений](#-шаблоны-для-создания-представлений)
 7. [Spring Data](Spring-Data-JDBC.md)
+8. [Spring Security](#-spring-security)
 
 ## 📁 Структура проекта Spring
 Проект имеет типичную структуру проекта 
@@ -116,6 +117,33 @@ Password: пустая строка
 | Mustache                | spring-boot-starter-mustache         |
 | Thymeleaf               | spring-boot-starter-thymeleaf        |
 
+
+## 🎉 Spring Security
+Подключение Spring Security осуществляется при помощи следующей зависимости:
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+После этого перед вами появится страница входа, предлагающая
+пройти аутентификацию.
+
+Для аутентификации нужно будет ввести **имя пользователя** и **пароль**.
+* Имя пользователя - `user`
+* Пароль будет сгенерирован случайным образом и записан в журнал работы
+приложения.
+Пример:
+```textmate
+Using generated security password: a021b0e5-381f-4f80-bb5d-35661b36ad71
+```
+
+**Средство для шифрования паролей (в Spring):**
+* `BCryptPasswordEncoder` - применяет надежное шифрование bcrypt;
+* `NoOpPasswordEncoder` - не применяет шифрование;
+* `Pbkdf2PasswordEncoder` - применяет шифрование PBKDF2;
+* `SCryptPasswordEncoder` - применяет шифрование Scrypt;
+* `StandardPasswordEncoder` - применяет шифрование SHA-256 (фактически устарел).
 
 ## 💻 Электронные ресурсы
 1. Spring поддерживает API проверки JavaBean (также известный 
