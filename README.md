@@ -13,6 +13,7 @@
 6. [Шаблоны для создания представлений](#-шаблоны-для-создания-представлений)
 7. [Spring Data](Spring-Data-JDBC.md)
 8. [Spring Security](#-spring-security)
+9. [Хранилище учетных записей в Spring](#-хранилище-учетных-записей-в-spring)
 
 ## 📁 Структура проекта Spring
 Проект имеет типичную структуру проекта 
@@ -144,6 +145,26 @@ Using generated security password: a021b0e5-381f-4f80-bb5d-35661b36ad71
 * `Pbkdf2PasswordEncoder` - применяет шифрование PBKDF2;
 * `SCryptPasswordEncoder` - применяет шифрование Scrypt;
 * `StandardPasswordEncoder` - применяет шифрование SHA-256 (фактически устарел).
+
+### 🧑 Хранилище учетных записей в Spring
+Чтобы настроить хранилище учетных записей пользователей для их аутентификации,
+понадобится bean-компонент UserDetailsService.
+
+Интерфейс UserDetailsService относительно прост и имеет всего один метод,
+который нужно реализовать:
+
+```java
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+public interface UserDetailsService {
+    UserDetailsService loadUserByUsername(String username) throws UsernameNotFoundException;
+}
+```
+
+В Spring Security есть несколько готовых реализаций UserDetailsService:
+1) хранилище учетных записей в памяти;
+2) хранилище учетных записей JDBC;
+3) хранилище учетных записей LDAP.
 
 ## 💻 Электронные ресурсы
 1. Spring поддерживает API проверки JavaBean (также известный 
