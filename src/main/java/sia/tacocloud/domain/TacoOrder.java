@@ -1,13 +1,17 @@
 package sia.tacocloud.domain;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -20,13 +24,14 @@ import java.util.List;
  * Класс, представляющий заказ
  */
 @Data
-@Table
+@Entity
 public class TacoOrder implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Date placedAt = new Date();
@@ -76,6 +81,7 @@ public class TacoOrder implements Serializable {
     /**
      * Заказ
      */
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Taco> tacos = new ArrayList<>();
 
     /**

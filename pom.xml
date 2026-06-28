@@ -31,11 +31,13 @@
             <artifactId>spring-boot-starter-validation</artifactId>
             <version>3.2.4</version>
         </dependency>
-        <!-- Spring Data JDBC -->
+
+        <!-- Spring Data JPA  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
         <!-- H2 Database -->
         <dependency>
             <groupId>com.h2database</groupId>

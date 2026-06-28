@@ -4,3 +4,10 @@ spring:
   datasource:
     generate-unique-name: false
     name: tacocloud
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true   # data.sql ПОСЛЕ Hibernate
+  sql:
+    init:
+      mode: always

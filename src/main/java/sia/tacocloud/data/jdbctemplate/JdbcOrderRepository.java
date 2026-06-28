@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 import sia.tacocloud.domain.Ingredient;
-import sia.tacocloud.domain.IngredientRef;
 import sia.tacocloud.domain.Taco;
 import sia.tacocloud.domain.TacoOrder;
 
@@ -96,14 +95,14 @@ public class JdbcOrderRepository {
         return tacoId;
     }
 
-    private void saveIngredientRefs(long tacoId, List<IngredientRef> ingredientRef) {
+    private void saveIngredientRefs(long tacoId, List<Ingredient> ingredientRef) {
         int key = 0;
 
-        for (IngredientRef ingredient : ingredientRef) {
+        for (Ingredient ingredient : ingredientRef) {
             jdbcOperations.update(
                     "insert into Ingredient_Ref (ingredient, taco, taco_key) "
                             + "values (?, ?, ?)",
-                    ingredient.getIngredient(), tacoId, key++);
+                    ingredient.getName(), tacoId, key++);
         }
     }
 

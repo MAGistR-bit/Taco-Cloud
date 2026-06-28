@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import sia.tacocloud.data.jdbc.IngredientRepository;
 import sia.tacocloud.data.jdbc.OrderRepository;
 import sia.tacocloud.domain.Ingredient;
-import sia.tacocloud.domain.IngredientRef;
 import sia.tacocloud.domain.Taco;
 
 import java.util.Arrays;
@@ -69,9 +68,9 @@ class DesignTacoControllerTest {
         design.setName("Test Taco");
 
         design.setIngredients(
-                Arrays.asList(new IngredientRef("FLTO"),
-                        new IngredientRef("GRBF"),
-                        new IngredientRef("CHED")
+                Arrays.asList(new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP),
+                        new Ingredient("GRBF", "Ground Beef", Ingredient.Type.PROTEIN),
+                        new Ingredient("CHED", "Cheddar", Ingredient.Type.CHEESE)
                 ));
 
     }
