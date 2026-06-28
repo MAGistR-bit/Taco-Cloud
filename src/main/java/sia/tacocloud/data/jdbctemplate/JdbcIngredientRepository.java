@@ -8,7 +8,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * @author Mikhail
+ * <p>Это старая реализация, которая использует JDBC.</p>
+ */
 public class JdbcIngredientRepository {
 
     private final JdbcTemplate jdbcTemplate;

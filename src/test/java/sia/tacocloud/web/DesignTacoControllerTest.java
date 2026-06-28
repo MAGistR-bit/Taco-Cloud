@@ -9,8 +9,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import sia.tacocloud.data.jdbc.IngredientRepository;
-import sia.tacocloud.data.jdbc.OrderRepository;
+import sia.tacocloud.data.jpa.IngredientRepository;
+import sia.tacocloud.data.jpa.OrderRepository;
 import sia.tacocloud.domain.Ingredient;
 import sia.tacocloud.domain.Taco;
 
@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;

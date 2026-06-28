@@ -1,4 +1,4 @@
-package sia.tacocloud.data.jdbc;
+package sia.tacocloud.data.jpa;
 
 import org.springframework.data.repository.CrudRepository;
 import sia.tacocloud.domain.Ingredient;

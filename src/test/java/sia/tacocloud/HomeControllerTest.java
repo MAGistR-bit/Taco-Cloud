@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import sia.tacocloud.data.jdbc.IngredientRepository;
+import sia.tacocloud.data.jpa.IngredientRepository;
 import sia.tacocloud.web.HomeController;
 
 import static org.hamcrest.Matchers.containsString;

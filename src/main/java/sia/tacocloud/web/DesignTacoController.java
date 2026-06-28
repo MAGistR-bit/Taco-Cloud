@@ -11,7 +11,7 @@ import sia.tacocloud.domain.Ingredient;
 import sia.tacocloud.domain.Ingredient.Type;
 import sia.tacocloud.domain.Taco;
 import sia.tacocloud.domain.TacoOrder;
-import sia.tacocloud.data.jdbc.IngredientRepository;
+import sia.tacocloud.data.jpa.IngredientRepository;
 
 import java.util.ArrayList;
 import java.util.List;
