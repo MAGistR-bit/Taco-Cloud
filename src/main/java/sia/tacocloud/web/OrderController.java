@@ -2,6 +2,7 @@ package sia.tacocloud.web;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,10 @@ public class OrderController {
      * @return возвращает логическое представление
      */
     @GetMapping("/current")
-    public String orderForm() {
+    public String orderForm(Authentication authentication) {
+        log.info("Current user: {}, authorities: {}",
+                authentication != null ? authentication.getName() : "anonymous",
+                authentication != null ? authentication.getAuthorities() : "none");
         return "orderForm";
     }
 
