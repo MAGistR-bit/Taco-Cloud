@@ -18,6 +18,20 @@ div.ingredient-group {
     clear: both;
 }
 
+.header-container {
+    background-color: #553333;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.header-container .header-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
 *, *:after, *:before {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
