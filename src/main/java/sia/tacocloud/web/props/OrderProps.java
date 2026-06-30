@@ -17,6 +17,9 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class OrderProps {
 
+    /**
+     * Максимальное число заказов в списке
+     */
     @Min(value = 5, message = "must be between 5 and 25")
     @Max(value = 25, message = "must be between 5 and 25")
     private int pageSize = 20;
