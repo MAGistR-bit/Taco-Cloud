@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -35,6 +36,12 @@ public class TacoOrder implements Serializable {
     private Long id;
 
     private Date placedAt = new Date();
+
+    /**
+     * У одного пользователя может быть много заказов
+     */
+    @ManyToOne
+    private User user;
 
     /**
      * Название доставки
