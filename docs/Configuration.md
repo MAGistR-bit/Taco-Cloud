@@ -146,3 +146,59 @@ c именем `additional-spring-configuration-metadata.json`.
     <optional>true</optional>
 </dependency>
 ```
+
+### 👨‍🎓 Настройка с помощью профилей
+Профили - разновидность условной конфигурации, в которой
+разные bean-компоненты и конфигурационные классы и свойства
+применяются или игнорируются в зависимости от профиля, действующего
+во время выполнения.
+
+Один из способов определить свойства профиля - создать еще один
+YAML-файл свойств, содержащий только свойства, имеющие настройки,
+характерные для промышленного окружения.
+
+Имя файла должно выбираться в соответствии со следующим
+соглашением: `application-{имя профиля}.yml` или `application-{имя профиля}.properties`.
+
+**Пример:**
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/tacocloud
+    username: tacouser
+    password: tacopassword
+logging:
+  level:
+    tacos: WARN
+```
+
+Другой способ предполагает определение свойств профилей
+общих свойств в `application.yml` с разделением тремя дефисами
+и добавлением свойств `spring.profiles` с именами профилей.
+
+**Пример:**
+```yaml
+logging:
+  level:
+    tacos: DEBUG
+
+---    
+spring:
+  profiles: prod
+  
+  datasource:
+    url: jdbc:mysql://localhost/tacocloud
+    username: tacouser
+    password: tacopassword
+    
+logging:
+  level:
+    tacos: WARN
+```
+
+> Если приложение запускается как выполняемый файл JAR, назначить
+> активный профиль можно с помощью параметра командной строки, например:
+> `java -jar taco-cloud.jar --spring.profiles.active=prod`
+
+Также можно использовать аннотацию @Profile, для того чтобы сообщить,
+какие bean-компоненты должны быть активированы для того или иного профиля.
