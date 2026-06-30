@@ -123,3 +123,26 @@ taco:
   orders:
     pageSize: 10
 ```
+
+Если необходимо добавить метаданные к своим созданным свойствам,
+то следует создать в папке `src/main/resources/META-INF` файл
+c именем `additional-spring-configuration-metadata.json`.
+
+Его содержимое будет представлено ниже:
+```json
+{"properties": [
+  {
+    "name": "taco.orders.page-size",
+    "type": "java.lang.Integer",
+    "description": "Sets the maximum number of orders to display in a list."
+  }
+]}
+```
+После этого нужно будет подключить следующую зависимость в `pom.xml`:
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-configuration-processor</artifactId>
+    <optional>true</optional>
+</dependency>
+```
