@@ -28,6 +28,7 @@ export SERVER_PORT=9090
 ### 📻 Содержание
 1. [Настройка источника данных](#-настройка-источника-данных)
 2. [Настройка журналирования](#-настройка-журналирования)
+3. [Конфигурационные свойства](#-конфигурационные-свойства)
 
 
 ### 🎩 Настройка источника данных
@@ -98,3 +99,27 @@ logging:
 
 По умолчанию ротация файлов журналов производится, **как 
 только они достигают размера 10 Мбайт**.
+
+### 🎲 Конфигурационные свойства
+Для создания конфигурационных свойств используется аннотация `@ConfigurationProperties`.
+Пример использования представлен ниже.
+
+```java
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Component
+@ConfigurationProperties(prefix = "taco.orders")
+@Data
+public class OrderProps {
+    
+    private ing pageSize = 20;
+}
+```
+
+```yaml
+taco:
+  orders:
+    pageSize: 10
+```
