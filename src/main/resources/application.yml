@@ -7,10 +7,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-    defer-datasource-initialization: true   # data.sql ПОСЛЕ Hibernate
   sql:
     init:
-      mode: always
+      mode: never     # файл data.sql больше не используется
 
 taco:
   orders:
