@@ -16,6 +16,7 @@
 9. [Хранилище учетных записей в Spring](#-хранилище-учетных-записей-в-spring)
 10. [Использование сторонних систем аутентификации](#-использование-сторонних-систем-аутентификации)
 11. [Знай своего пользователя](docs/Security.md)
+12. [Taco API](#-taco-api)
 
 ## 📁 Структура проекта Spring
 Проект имеет типичную структуру проекта 
@@ -200,6 +201,32 @@ spring:
             clientSecret: <client secret>
             scope: <comma-separated list of requested scope>
 ```
+
+## 🎁 Taco API
+Как только приложение будет запущено, вы можете подключиться к API, 
+используя утилиту `curl`.
+
++ **Получить список недавно приготовленных тако:**
+
+```bash
+$ curl localhost:8080/api/tacos?recent
+```
+Пример ответа:
+```json
+[{"id":2,"createdAt":"2026-07-01T09:29:54.562+00:00","name":"Bovine Bounty","ingredients":[{"id":"COTO","name":"Corn Tortilla","type":"WRAP"},{"id":"GRBF","name":"Ground Beef","type":"PROTEIN"},{"id":"CHED","name":"Cheddar","type":"CHEESE"},{"id":"JACK","name":"Monterrey Jack","type":"CHEESE"},{"id":"SRCR","name":"Sour Cream","type":"SAUCE"}]},{"id":1,"createdAt":"2026-07-01T09:29:54.531+00:00","name":"Carnivore","ingredients":[{"id":"FLTO","name":"Flour Tortilla","type":"WRAP"},{"id":"GRBF","name":"Ground Beef","type":"PROTEIN"},{"id":"CARN","name":"Carnitas","type":"PROTEIN"},{"id":"SRCR","name":"Sour Cream","type":"SAUCE"},{"id":"SLSA","name":"Salsa","type":"SAUCE"},{"id":"CHED","name":"Cheddar","type":"CHEESE"}]}]
+
+```
+
++ **Получить тако по идентификатору:**
+```bash
+$ curl localhost:8080/api/tacos/2
+```
+Пример ответа:
+```json
+{"id":2,"createdAt":"2026-07-01T09:47:43.345+00:00","name":"Bovine Bounty","ingredients":[{"id":"COTO","name":"Corn Tortilla","type":"WRAP"},{"id":"GRBF","name":"Ground Beef","type":"PROTEIN"},{"id":"CHED","name":"Cheddar","type":"CHEESE"},{"id":"JACK","name":"Monterrey Jack","type":"CHEESE"},{"id":"SRCR","name":"Sour Cream","type":"SAUCE"}]}
+```
+
+---
 
 ## 💻 Электронные ресурсы
 1. Spring поддерживает API проверки JavaBean (также известный 
