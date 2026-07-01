@@ -202,6 +202,18 @@ spring:
             scope: <comma-separated list of requested scope>
 ```
 
+## 👑 Создание контроллеров RESTful
+Атрибут `consumes` определяет **формат входных данных в запросе**,
+а `produces` - **формат возвращаемых клиенту данных**.
+
+> PUT - это семантическая противоположность GET.
+
+_**Метод PUT предназначен для полной замены ресурса**_, а не для его изменения.
+Напротив, целью **_HTTP-метода PATCH является исправление или частичное изменение ресурса_**.
+
+Если какое-либо из свойств заказа при отправке PUT-запроса будет отсутствовать,
+то оно **будет затерто нулевым значением**.
+
 ## 🎁 Taco API
 Как только приложение будет запущено, вы можете подключиться к API, 
 используя утилиту `curl`.
@@ -224,6 +236,60 @@ $ curl localhost:8080/api/tacos/2
 Пример ответа:
 ```json
 {"id":2,"createdAt":"2026-07-01T09:47:43.345+00:00","name":"Bovine Bounty","ingredients":[{"id":"COTO","name":"Corn Tortilla","type":"WRAP"},{"id":"GRBF","name":"Ground Beef","type":"PROTEIN"},{"id":"CHED","name":"Cheddar","type":"CHEESE"},{"id":"JACK","name":"Monterrey Jack","type":"CHEESE"},{"id":"SRCR","name":"Sour Cream","type":"SAUCE"}]}
+```
+
++ **Создать новый тако:**
+```bash
+curl -v -X POST http://localhost:8080/api/tacos \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Betsy",
+    "ingredients": [
+      {"id": "LETC", "name": "Lettuce", "type": "VEGGIES"},
+      {"id": "SRCR", "name": "Sour Cream", "type": "SAUCE"}
+    ]
+  }' 
+```
+
+Пример ответа:
+```json
+< Expires: 0
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Date: Wed, 01 Jul 2026 12:38:10 GMT
+<
+{"id":4,"createdAt":"2026-07-01T10:38:10.518+00:00","name":"Betsy","ingredients":[{"id":"LETC","name":"Lettuce","type":"VEGGIES"},{"id":"SRCR","name":"Sour Cream","type":"SAUCE"}]}
+```
+
++ **Частично обновить информацию о заказе:**
+```bash
+$ curl -v -X PATCH http://localhost:8080/api/orders/1   -H "Content-Type: application/json"   -d '{
+    "deliveryName": "Betsy",
+    "deliveryZip": "123456"
+  }'
+```
+
+Пример ответа:
+```json
+* upload completely sent off: 62 bytes
+< HTTP/1.1 200
+        
+{"id":1,"placedAt":"2026-07-01T12:13:08.898+00:00","user":{"id":1,"username":"jordon","password":"$2a$10$7Pl/lSs81IJDiXVffOysYuxXOeEimEW2zrWQYEhvZKeVHCpGPpSz6","fullName":"Craig Wa
+lls","street":"123 North Street","city":"Cross Roads","state":"TX","zip":"76227","phoneNumber":"123-123-1234","enabled":true,"credentialsNonExpired":true,"accountNonExpired":true,"
+authorities":[{"authority":"ROLE_USER"}],"accountNonLocked":true},"deliveryName":"Betsy","deliveryStreet":"123 North Street","deliveryCity":"Cross Roads","deliveryState":"TX","deli
+veryZip":"123456","ccNumber":"4276080018320839","ccExpiration":"12/20","ccCVV":"456","tacos":[{"id":3,"createdAt":"2026-07-01","name":"Monterrey","ingredients":[
+{"id":"FLTO","name":"Flour Tortilla","type":"WRAP"},{"id":"COTO","name":"Corn Tortilla","type":"WRAP"},{"id":"SLSA","name":"Salsa","type":"SAUCE"}]}]}
+```
+
++ **Удалить тако по идентификатору:**
+```bash
+$ curl -v -X DELETE localhost:8080/api/orders/1
+```
+Пример ответа:
+```textmate
+* Request completely sent off
+< HTTP/1.1 204 
+< Vary: Origin
 ```
 
 ---
