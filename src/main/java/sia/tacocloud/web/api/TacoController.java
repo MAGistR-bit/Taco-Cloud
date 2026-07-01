@@ -7,7 +7,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import sia.tacocloud.data.jpa.TacoRepository;
 import sia.tacocloud.domain.Taco;
@@ -47,5 +50,16 @@ public class TacoController {
         Optional<Taco> optTaco = tacoRepository.findById(id);
         return optTaco.map(taco -> new ResponseEntity<>(taco, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * Создает новый тако
+     * @param taco тако, который нужно сохранить в базу данных
+     * @return созданный тако
+     */
+    @ResponseStatus(code = HttpStatus.CREATED)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Taco postTaco(@RequestBody Taco taco) {
+        return tacoRepository.save(taco);
     }
 }
