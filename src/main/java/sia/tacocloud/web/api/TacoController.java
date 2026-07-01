@@ -2,12 +2,17 @@ package sia.tacocloud.web.api;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sia.tacocloud.data.jpa.TacoRepository;
 import sia.tacocloud.domain.Taco;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/tacos", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -30,5 +35,17 @@ public class TacoController {
                 Sort.by("createdAt").descending());
 
         return tacoRepository.findAll(page).getContent();
+    }
+
+    /**
+     * Возвращает тако по его идентификатору
+     * @param id идентификатор тако
+     * @return {@link ResponseEntity<Taco>}, который возвращает объект тако вместе с HTTP-статусом.
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Taco> tacoById(@PathVariable("id") Long id) {
+        Optional<Taco> optTaco = tacoRepository.findById(id);
+        return optTaco.map(taco -> new ResponseEntity<>(taco, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 }
