@@ -94,9 +94,10 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/")
                 )
 
-                // Отключаем CSRF для H2 Console (только для разработки!)
+                // Отключаем CSRF для H2 Console (только для разработки!).
+                // Для REST API токен CSRF также отключается
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/h2-console/**")
+                        .ignoringRequestMatchers("/h2-console/**", "/api/**")
                 )
 
                 // Разрешаем отображение H2 Console во фрейме
